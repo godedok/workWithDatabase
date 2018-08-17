@@ -6,8 +6,7 @@ require "../common.php";
 
 if (isset($_GET["Id"])) {
   try {
-    $newMusician = new Musician;
-    $newMusician->id = $_GET["Id"];
+    $newMusician = new Musician($_GET["Id"]);
     $newMusician->deleteRecord();
     $success = "Musician successfully deleted";
   } catch(PDOException $error) {

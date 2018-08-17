@@ -17,8 +17,16 @@ class Musician
       );
     private $connect;
 
-    public function __construct()
+    public function __construct($id = null, $firstName = null, $lastName = null, $gender = null,
+    $yearOfBirth = null, $genre = null, $group = null)
     {
+        $this->id = $id;
+        $this->firstName = $firstName;
+        $this->lastName = $lastName;
+        $this->gender = $gender;
+        $this->yearOfBirth = $yearOfBirth;
+        $this->genre = $genre;
+        $this->group = $group;
         if (!isset($this->connect)) {
             try {
                 $this->connect = new PDO($this->dsn, $this->user, $this->password, $this->options);

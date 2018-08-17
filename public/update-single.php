@@ -4,14 +4,8 @@ require "musician.php";
 require "../common.php";
 if (isset($_POST['submit'])) {
   try {
-    $newMusician = new Musician;
-    $newMusician->id = $_POST['Id'];
-    $newMusician->firstName = $_POST['FirstName'];
-		$newMusician->lastName = $_POST['LastName'];
-		$newMusician->gender = $_POST['Gender'];
-		$newMusician->yearOfBirth =  $_POST['YearOfBirth'];
-		$newMusician->genre = $_POST['Genre'];
-    $newMusician->group = $_POST['IsInGroup'];
+    $newMusician = new Musician($_POST['Id'], $_POST['FirstName'], $_POST['LastName'],
+     $_POST['Gender'], $_POST['YearOfBirth'], $_POST['Genre'], $_POST['IsInGroup']);
     $newMusician->updateRecord();
   } catch(PDOException $error) {
       

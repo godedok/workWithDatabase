@@ -5,13 +5,8 @@ if (isset($_POST['submit'])) {
 	require "musician.php";
 
 	try {
-		$newMusician = new Musician;
-		$newMusician->firstName = $_POST['FirstName'];
-		$newMusician->lastName = $_POST['LastName'];
-		$newMusician->gender = $_POST['Gender'];
-		$newMusician->yearOfBirth =  $_POST['YearOfBirth'];
-		$newMusician->genre = $_POST['Genre'];
-		$newMusician->group = $_POST['IsInGroup'];
+		$newMusician = new Musician(null, $_POST['FirstName'], $_POST['LastName'], $_POST['Gender'],
+		$_POST['YearOfBirth'], $_POST['Genre'], $_POST['IsInGroup']);
 		$newMusician->createRecord();
 	} catch(PDOException $error) {
 	
