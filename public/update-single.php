@@ -16,9 +16,7 @@ if (isset($_GET['Id'])) {
   $newMusician = new Musician;
   $newMusician->id = $_GET['Id'];
   $user = $newMusician->selectRecord();
-} else {
-    echo "Something went wrong!";
-}
+} 
 ?>
 
 <?php require "templates/header.php"; ?>
@@ -26,7 +24,7 @@ if (isset($_GET['Id'])) {
 <?php if (isset($_POST['submit']) && !isset($error)) { ?>
 	<blockquote><?php echo escape($_POST['FirstName']); ?> successfully updated.</blockquote>
 <?php } elseif(isset($error)) { ?>
-    <blockquote> Data not update </blockquote>
+    <blockquote> Data not update. Check the entered data.  </blockquote>
 <?php } ?>
 
 <h2>Edit a musician</h2>

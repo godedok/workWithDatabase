@@ -24,9 +24,11 @@ class Musician
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->gender = $gender;
-        $this->yearOfBirth = $yearOfBirth;
         $this->genre = $genre;
         $this->group = $group;
+        if (strlen($yearOfBirth) == 4 && $yearOfBirth > 1900 && $yearOfBirth < 2020) {
+            $this->yearOfBirth = $yearOfBirth;
+        }
         if (!isset($this->connect)) {
             try {
                 $this->connect = new PDO($this->dsn, $this->user, $this->password, $this->options);
@@ -64,7 +66,6 @@ class Musician
     {
         $sql = "SELECT * FROM Cubans WHERE Genre LIKE '%$this->genre%' ";
         $statement = $this->connect->prepare($sql);
-        $statement->bindParam(':Genre', $this->genre, PDO::PARAM_STR);
         $statement->execute();
         return $statement->fetchAll();
     }
