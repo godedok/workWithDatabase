@@ -1,43 +1,31 @@
 <?php
 
 if (isset($_POST['submit'])) {
-	require "../config.php";
 	require "../common.php";
+	require "musician.php";
 
 	try {
-		$connection = new PDO($dsn, $username, $password, $options);
-		$new_user = array(
-			"FirstName"   => $_POST['FirstName'],
-			"LastName"    => $_POST['LastName'],
-			"Gender"      => $_POST['Gender'],
-			"YearOfBirth" => $_POST['YearOfBirth'],
-            "Genre"       => $_POST['Genre'],
-            "IsInGroup"   => $_POST['IsInGroup']
-		);
-		$sql = sprintf(
-				"INSERT INTO %s (%s) values (%s)",
-				"Cubans",
-				implode(", ", array_keys($new_user)),
-				":" . implode(", :", array_keys($new_user))
-		);
-		$statement = $connection->prepare($sql);
-		var_dump($statement);
-		$statement->execute($new_user);
-		var_dump($new_user);
+		$newMusician = new Musician;
+		$newMusician->firstName = $_POST['FirstName'];
+		$newMusician->lastName = $_POST['LastName'];
+		$newMusician->gender = $_POST['Gender'];
+		$newMusician->yearOfBirth =  $_POST['YearOfBirth'];
+		$newMusician->genre = $_POST['Genre'];
+		$newMusician->group = $_POST['IsInGroup'];
+		$newMusician->createRecord();
 	} catch(PDOException $error) {
-		$error = $error->getMessage();
-	}
 	
+	}
 }
 ?>
 
 <?php require "templates/header.php"; ?>
 
-<?php if (isset($_POST['submit']) && !isset($error) && $statement) { ?>
-    <blockquote><?php echo $_POST['FirstName']; ?> successfully added.</blockquote>
-<?php } elseif(isset($error)) {
-    echo "Ошибочка вышла, запись не добавлена.";
-} ?>
+<?php if (isset($_POST['submit']) && !isset($error)) { ?>
+    		<blockquote> <?php echo escape($_POST['FirstName']); ?> successfully added.</blockquote>
+<?php } elseif(isset($error)) { ?>
+    		<blockquote> Data not added </blockquote>
+<?php } ?>
 
 <h2>New musician</h2>
 

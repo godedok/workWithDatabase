@@ -1,63 +1,39 @@
 <?php
 
-require "../config.php";
+require "musician.php";
 require "../common.php";
 if (isset($_POST['submit'])) {
   try {
-    $connection = new PDO($dsn, $username, $password, $options);
-    $user =[
-      "Id"          => $_POST['Id'],
-      "FirstName"   => $_POST['FirstName'],
-      "LastName"    => $_POST['LastName'],
-      "Gender"      => $_POST['Gender'],
-      "YearOfBirth" => $_POST['YearOfBirth'],
-      "Genre"       => $_POST['Genre'],
-      "IsInGroup"   => $_POST['IsInGroup']
-    ];
-
-    $sql = "UPDATE Cubans 
-            SET Id = :Id, 
-              FirstName = :FirstName, 
-              LastName = :LastName, 
-              Gender = :Gender, 
-              YearOfBirth = :YearOfBirth, 
-              Genre = :Genre, 
-              IsInGroup = :IsInGroup 
-            WHERE Id = :Id";
-  
-  $statement = $connection->prepare($sql);
-  $statement->execute($user);
+    $newMusician = new Musician;
+    $newMusician->id = $_POST['Id'];
+    $newMusician->firstName = $_POST['FirstName'];
+		$newMusician->lastName = $_POST['LastName'];
+		$newMusician->gender = $_POST['Gender'];
+		$newMusician->yearOfBirth =  $_POST['YearOfBirth'];
+		$newMusician->genre = $_POST['Genre'];
+    $newMusician->group = $_POST['IsInGroup'];
+    $newMusician->updateRecord();
   } catch(PDOException $error) {
-      $error = $error->getMessage();
+      
   }
 }
   
 if (isset($_GET['Id'])) {
-  try {
-    $connection = new PDO($dsn, $username, $password, $options);
-    $id = $_GET['Id'];
-    $sql = "SELECT * FROM Cubans WHERE Id = :Id";
-    $statement = $connection->prepare($sql);
-    $statement->bindValue(':Id', $id);
-    $statement->execute();
-    
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-  } catch(PDOException $err) {
-      $err = $err->getMessage();
-  }
+  $newMusician = new Musician;
+  $newMusician->id = $_GET['Id'];
+  $user = $newMusician->selectRecord();
 } else {
     echo "Something went wrong!";
-    exit;
 }
 ?>
 
 <?php require "templates/header.php"; ?>
 
-<?php if (isset($_POST['submit']) && $statement && !isset($error)) { ?>
+<?php if (isset($_POST['submit']) && !isset($error)) { ?>
 	<blockquote><?php echo escape($_POST['FirstName']); ?> successfully updated.</blockquote>
-<?php } elseif(isset($error)) {
-    echo "Ошибочка вышла, запись не добавлена.";
-} ?>
+<?php } elseif(isset($error)) { ?>
+    <blockquote> Data not update </blockquote>
+<?php } ?>
 
 <h2>Edit a musician</h2>
 
