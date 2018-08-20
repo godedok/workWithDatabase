@@ -7,7 +7,6 @@ if (isset($_POST['submit'])) {
 	try {
 		$newMusician = new Musician($_POST);
 		$newMusician->createRecord();
-		var_dump($_POST);
 	} catch(PDOException $error) {
 	
 	}

@@ -1,5 +1,5 @@
 <?php 
-function createTable($result, $options = 0) 
+function createTable($result) 
 { ?>
 
 <table>

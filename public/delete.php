@@ -23,7 +23,7 @@ $result = $newMusician->readTable();
 
 <?php if ($success) echo $success; ?>
 
-<?php createTable($result, "delete"); ?>
+<?php createTable($result); ?>
 
 <a href="index.php">Back to home</a>
 
