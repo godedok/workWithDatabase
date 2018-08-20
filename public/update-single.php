@@ -13,8 +13,7 @@ if (isset($_POST['submit'])) {
 }
   
 if (isset($_GET['Id'])) {
-  $newMusician = new Musician;
-  $newMusician->id = $_GET['Id'];
+  $newMusician = new Musician($_GET);
   $user = $newMusician->selectRecord();
 } 
 ?>
@@ -24,9 +23,9 @@ if (isset($_GET['Id'])) {
 <?php if (isset($_POST['submit']) && !isset($error)) { ?>
 	<blockquote><?php echo escape($_POST['FirstName']); ?> successfully updated.</blockquote>
 <?php } elseif(isset($error)) { 
-          $newMusician = new Musician($_POST);
-          echo $newMusician->outputError();
-      } ?>
+  $newMusician = new Musician($_POST);
+  echo $newMusician->outputError();
+} ?>
 
 <h2>Edit a musician</h2>
 

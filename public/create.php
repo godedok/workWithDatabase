@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
 		$newMusician = new Musician($_POST);
 		$newMusician->createRecord();
 	} catch(PDOException $error) {
-	
+		
 	}
 }
 ?>
@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
 <?php require "templates/header.php"; ?>
 
 <?php if (isset($_POST['submit']) && !isset($error)) { ?>
-    		<blockquote> <?php echo escape($_POST['FirstName']); ?> successfully added.</blockquote>
+    <blockquote> <?php echo escape($_POST['FirstName']); ?> successfully added.</blockquote>
 <?php } elseif(isset($error)) {
     	echo $newMusician->outputError();	
 } ?>
