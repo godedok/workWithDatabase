@@ -5,7 +5,7 @@ require "../common.php";
 
 if (isset($_POST['submit'])) {
   try {
-    $newMusician = new Musician($_POST);
+    $newMusician = new Musician(array_merge($_GET, $_POST));
     $newMusician->updateRecord();
   } catch(PDOException $error) {
       
@@ -30,9 +30,12 @@ if (isset($_GET['Id'])) {
 <h2>Edit a musician</h2>
 
 <form method="post">
-    <?php foreach ($user as $key => $value) : ?>
+    <?php foreach ($user as $key => $value) : 
+      if ($key == "Id") {
+        continue;
+      }?>
       <label for="<?php echo $key; ?>"><?php echo ucfirst($key); ?></label>
-	    <input type="text" name="<?php echo $key; ?>" id="<?php echo $key; ?>" value="<?php echo escape($value); ?>" <?php echo ($key === 'Id' ? 'readonly' : null); ?>>
+	    <input type="text" name="<?php echo $key; ?>" id="<?php echo $key; ?>" value="<?php echo escape($value); ?>">
     <?php endforeach; ?> 
     <input type="submit" name="submit" value="Submit">
 </form>
