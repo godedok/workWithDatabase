@@ -5,12 +5,11 @@ require "../common.php";
 require "table.php";
 $newMusician = new Musician;
 $result = $newMusician->readTable();
+
 if (isset($_POST['submit'])) {
 	$newMusician->genre = $_POST['Genre'];
 	$result = $newMusician->findRecord();
 }
-
-
 
 ?>
 
@@ -29,6 +28,5 @@ if (isset($_POST['submit'])) {
 <h2>List of musicians</h2>
 
 <?php createTable($result); ?>
-
 
 <?php include "templates/footer.php"; ?>

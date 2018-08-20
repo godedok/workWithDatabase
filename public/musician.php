@@ -22,27 +22,29 @@ class Musician
         foreach ($POST as $key => $value) {
             switch ($key) {
                 case "Id":
-                    $this->id = $value;
+                    $value == "" ? $this->id = null : $this->id = $value;
                     break;
                 case "FirstName":
-                    $this->firstName = $value;
+                    $value == "" ? $this->firstName = null : $this->firstName = $value;
                     break;
                 case "LastName":
-                    $this->lastName = $value;
+                    $value == "" ? $this->lastName = null : $this->lastName = $value;
                     break;
                 case "Gender":
-                    $this->gender = $value;
+                    $value == "" ? $this->gender = null : $this->gender = $value;
                     break;
                 case "YearOfBirth":
-                    if (strlen($value) == 4 && $value > 1900 && $value < 2020) {
+                    if (strlen($value) == 4 && $value > 1900 && $value < 2020 && is_numeric($value)) {
                         $this->yearOfBirth = $value;
+                    } else {
+                        $this->yearOfBirth = null;
                     }
                     break;
                 case "Genre":
-                    $this->genre = $value;
+                    $value == "" ? $this->genre = null : $this->genre = $value;
                     break;
                 case "IsInGroup":
-                    $this->group = $value;
+                    $value == "" ? $this->group = null : $this->group = $value;
                     break;
             }
         }
