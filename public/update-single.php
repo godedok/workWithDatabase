@@ -4,8 +4,7 @@ require "musician.php";
 require "../common.php";
 if (isset($_POST['submit'])) {
   try {
-    $newMusician = new Musician($_POST['Id'], $_POST['FirstName'], $_POST['LastName'],
-     $_POST['Gender'], $_POST['YearOfBirth'], $_POST['Genre'], $_POST['IsInGroup']);
+    $newMusician = new Musician($_POST);
     $newMusician->updateRecord();
   } catch(PDOException $error) {
       

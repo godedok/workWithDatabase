@@ -17,18 +17,44 @@ class Musician
       );
     private $connect;
 
-    public function __construct($id = null, $firstName = null, $lastName = null, $gender = null,
-    $yearOfBirth = null, $genre = null, $group = null)
+    public function __construct($POST)
     {
-        $this->id = $id;
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->gender = $gender;
-        $this->genre = $genre;
-        $this->group = $group;
-        if (strlen($yearOfBirth) == 4 && $yearOfBirth > 1900 && $yearOfBirth < 2020) {
-            $this->yearOfBirth = $yearOfBirth;
+        foreach ($POST as $key => $value) {
+            switch ($key) {
+                case "Id":
+                    $this->id = $value;
+                    break;
+                case "FirstName":
+                    $this->firstName = $value;
+                    break;
+                case "LastName":
+                    $this->lastName = $value;
+                    break;
+                case "Gender":
+                    $this->gender = $value;
+                    break;
+                case "YearOfBirth":
+                    if (strlen($value) == 4 && $value > 1900 && $value < 2020) {
+                        $this->yearOfBirth = $value;
+                    }
+                    break;
+                case "Genre":
+                    $this->genre = $value;
+                    break;
+                case "IsInGroup":
+                    $this->group = $value;
+                    break;
+            }
         }
+        //$this->id = $id;
+        //$this->firstName = $firstName;
+        //$this->lastName = $lastName;
+        //$this->gender = $gender;
+        //$this->genre = $genre;
+        //$this->group = $group;
+        //if (strlen($yearOfBirth) == 4 && $yearOfBirth > 1900 && $yearOfBirth < 2020) {
+        //    $this->yearOfBirth = $yearOfBirth;
+        //}
         if (!isset($this->connect)) {
             try {
                 $this->connect = new PDO($this->dsn, $this->user, $this->password, $this->options);

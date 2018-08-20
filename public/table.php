@@ -12,11 +12,8 @@ function createTable($result, $options = 0)
             <th>YearOfBirth</th>
             <th>Genre</th>
             <th>IsInGroup</th>
-            <?php // if($options == "update") { ?>
-                <th>Edit</th>
-            <?php // } elseif ($options == "delete") { ?>
-                <th>Delete</th>
-                <?php  //} ?>
+            <th>Edit</th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -29,11 +26,8 @@ function createTable($result, $options = 0)
             <td><?php echo escape($row["YearOfBirth"]); ?></td>
             <td><?php echo escape($row["Genre"]); ?></td>
             <td><?php echo escape($row["IsInGroup"]); ?> </td>
-            <?php //if($options == "update") { ?>
-                <td><a href="update-single.php?Id=<?php echo escape($row["Id"]); ?>">Edit</a></td>
-            <?php //} elseif ($options == "delete") { ?>
-                <td><a href="delete.php?Id=<?php echo escape($row["Id"]); ?>">Delete</a></td>
-                <?php //} ?>
+            <td><a href="update-single.php?Id=<?php echo escape($row["Id"]); ?>">Edit</a></td>
+            <td><a href="delete.php?Id=<?php echo escape($row["Id"]); ?>">Delete</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
