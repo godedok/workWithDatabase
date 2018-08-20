@@ -150,7 +150,7 @@ class Musician
     }
 
     public function deleteRecord()
-    {
+    {   
         $sql = "DELETE FROM Cubans WHERE Id = :Id";
         $statement = $this->connect->prepare($sql);
         $statement->bindValue(':Id', $this->id);
