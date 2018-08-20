@@ -17,9 +17,9 @@ if (isset($_POST['submit'])) {
 
 <?php if (isset($_POST['submit']) && !isset($error)) { ?>
     		<blockquote> <?php echo escape($_POST['FirstName']); ?> successfully added.</blockquote>
-<?php } elseif(isset($error)) { ?>
-    		<blockquote> Data not added. Check the entered data. </blockquote>
-<?php } ?>
+<?php } elseif(isset($error)) {
+    	echo $newMusician->outputError();	
+} ?>
 
 <h2>New musician</h2>
 

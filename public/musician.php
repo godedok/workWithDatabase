@@ -8,6 +8,7 @@ class Musician
     public $yearOfBirth;
     public $genre;
     public $group;
+    public $error;
 
     private $user = "root";
     private $password = "us19";
@@ -22,29 +23,60 @@ class Musician
         foreach ($POST as $key => $value) {
             switch ($key) {
                 case "Id":
-                    $value == "" ? $this->id = null : $this->id = $value;
+                    if ($value == "") {
+                        $this->id = null;
+                        $this->error[] = $key;
+                    } else {
+                            $this->id = $value;
+                    }
                     break;
                 case "FirstName":
-                    $value == "" ? $this->firstName = null : $this->firstName = $value;
+                    if ($value == "") {
+                        $this->firstName = null;
+                        $this->error[] = $key;
+                    } else {
+                        $this->firstName = $value;
+                    }
                     break;
                 case "LastName":
-                    $value == "" ? $this->lastName = null : $this->lastName = $value;
+                    if ($value == "") { 
+                        $this->lastName = null;
+                        $this->error[] = $key;
+                    } else {
+                        $this->lastName = $value;
+                    }
                     break;
                 case "Gender":
-                    $value == "" ? $this->gender = null : $this->gender = $value;
+                    if ($value == "") {
+                        $this->gender = null;
+                        $this->error[] = $key;
+                    } else {
+                        $this->gender = $value;
+                    }
                     break;
                 case "YearOfBirth":
                     if (strlen($value) == 4 && $value > 1900 && $value < 2020 && is_numeric($value)) {
                         $this->yearOfBirth = $value;
                     } else {
                         $this->yearOfBirth = null;
+                        $this->error[] = $key;
                     }
                     break;
                 case "Genre":
-                    $value == "" ? $this->genre = null : $this->genre = $value;
+                    if ($value == "") {
+                        $this->genre = null;
+                        $this->error[] = $key;
+                    } else { 
+                        $this->genre = $value;
+                    }
                     break;
                 case "IsInGroup":
-                    $value == "" ? $this->group = null : $this->group = $value;
+                    if ($value == "") {
+                        $this->group = null;
+                        $this->error[] = $key;
+                    } else {
+                        $this->group = $value;
+                    }
                     break;
             }
         }
@@ -123,5 +155,15 @@ class Musician
         $statement = $this->connect->prepare($sql);
         $statement->bindValue(':Id', $this->id);
         $statement->execute();
+    }
+
+    public function outputError()
+    {
+        $result = "";
+        foreach ($this->error as $value) {
+            $result .= "{$value}, ";
+        }
+        $result = "Input error in " . substr($result, 0, -2) . ".";
+        return $result;
     }
 }

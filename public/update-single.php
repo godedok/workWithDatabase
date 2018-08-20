@@ -2,6 +2,7 @@
 
 require "musician.php";
 require "../common.php";
+
 if (isset($_POST['submit'])) {
   try {
     $newMusician = new Musician($_POST);
@@ -22,9 +23,10 @@ if (isset($_GET['Id'])) {
 
 <?php if (isset($_POST['submit']) && !isset($error)) { ?>
 	<blockquote><?php echo escape($_POST['FirstName']); ?> successfully updated.</blockquote>
-<?php } elseif(isset($error)) { ?>
-    <blockquote> Data not update. Check the entered data.  </blockquote>
-<?php } ?>
+<?php } elseif(isset($error)) { 
+          $newMusician = new Musician($_POST);
+          echo $newMusician->outputError();
+      } ?>
 
 <h2>Edit a musician</h2>
 
