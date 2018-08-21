@@ -33,7 +33,7 @@ class Musician
                         $this->id = null;
                         $this->error[] = $key;
                     } else {
-                            $this->id = $value;
+                        $this->id = $value;
                     }
                     break;
                 case "FirstName":

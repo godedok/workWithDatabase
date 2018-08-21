@@ -21,7 +21,7 @@ if (isset($_POST['submit'])) {
 <?php if (isset($_POST['submit']) && !isset($error)) { ?>
     <blockquote> <?php echo escape($_POST['FirstName']); ?> successfully added.</blockquote>
 <?php } elseif(isset($error)) {
-    	echo $newMusician->outputError();	
+    echo $newMusician->outputError();	
 } ?>
 
 <h2>New musician</h2>
