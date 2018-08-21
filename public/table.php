@@ -1,4 +1,7 @@
 <?php 
+/**
+ * Create table with database and escape data
+ */
 function createTable($result) 
 { ?>
 

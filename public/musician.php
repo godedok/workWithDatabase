@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class for working with the database
+ */
 class Musician
 {
     public $id;
@@ -20,6 +23,9 @@ class Musician
 
     public function __construct($POST)
     {
+        /**
+         * Input validation and adding data to a class object
+         */
         foreach ($POST as $key => $value) {
             switch ($key) {
                 case "Id":
@@ -80,6 +86,9 @@ class Musician
                     break;
             }
         }
+        /**
+         * Connect to database
+        */
         if (!isset($this->connect)) {
             try {
                 $this->connect = new PDO($this->dsn, $this->user, $this->password, $this->options);
@@ -89,7 +98,9 @@ class Musician
             }
         }
     }
-
+    /**
+     * Return an array of data 
+     */
     public function arrayKeysValues()
     {
         return array(
@@ -101,7 +112,9 @@ class Musician
             "IsInGroup"   => $this->group
 		);
     }
-
+    /**
+     * Create new record into database
+     */
     public function createRecord()
     {
         $sql = sprintf(
@@ -112,7 +125,9 @@ class Musician
         $statement = $this->connect->prepare($sql);
 		$statement->execute($this->arrayKeysValues());
     }
-
+    /**
+     * Musician search by genre
+     */
     public function findRecord()
     {
         $sql = "SELECT * FROM Cubans WHERE Genre LIKE '%$this->genre%' ";
@@ -120,7 +135,9 @@ class Musician
         $statement->execute();
         return $statement->fetchAll();
     }
-
+    /**
+     * Reading data from the database
+     */
     public function readTable()
     {
         $sql = "SELECT * FROM Cubans";
@@ -128,7 +145,9 @@ class Musician
         $statement->execute();
         return $statement->fetchAll();
     }
-
+    /**
+     * Data selection by Id
+     */
     public function selectRecord()
     {
         $sql = "SELECT * FROM Cubans WHERE Id = :Id";
@@ -137,7 +156,9 @@ class Musician
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
-
+    /**
+     * Change the musicians data in the database
+     */
     public function updateRecord() 
     {
         $str = "Id = :Id";
@@ -148,7 +169,9 @@ class Musician
         $statement = $this->connect->prepare($sql);
         $statement->execute(array_merge([":Id" => $this->id], $this->arrayKeysValues()));
     }
-
+    /**
+     * Deleting an entry in the database
+     */
     public function deleteRecord()
     {   
         $sql = "DELETE FROM Cubans WHERE Id = :Id";
@@ -156,7 +179,9 @@ class Musician
         $statement->bindValue(':Id', $this->id);
         $statement->execute();
     }
-
+    /**
+     * Displays information about the error of the entered data
+     */
     public function outputError()
     {
         $result = "";

@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * We are waiting for data entry and if they are correct
+ * we add the entry to the database
+ */
 if (isset($_POST['submit'])) {
 	require "../common.php";
 	require "musician.php";

@@ -1,4 +1,8 @@
-<?php 
+<?php
+/**
+ * Home page with a search by genre, a link to create a record,
+ *  and information from the database
+ */
 include "templates/header.php";
 require "musician.php";
 require "../common.php";

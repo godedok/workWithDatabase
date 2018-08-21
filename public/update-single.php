@@ -1,4 +1,8 @@
 <?php
+/**
+ * Choose record, waiting for data entry and
+ * if they are correct we add changes to the database 
+ */
 
 require "musician.php";
 require "../common.php";

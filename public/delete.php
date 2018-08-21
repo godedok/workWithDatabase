@@ -6,6 +6,9 @@
 
 <?php
 require "musician.php";
+/**
+ * Take the id and in case of confirmation delete the record
+ */
 
 if (isset($_GET["Id"]) && isset($_POST["delete"])) {
   try {
