@@ -11,7 +11,7 @@ $newMusician = new Musician;
 $result = $newMusician->readTable();
 
 if (isset($_POST['submit'])) {
-	$newMusician->genre = $_POST['Genre'];
+	$newMusician->genre = $_POST['IdGenre'];
 	$result = $newMusician->findRecord();
 }
 
@@ -24,8 +24,8 @@ if (isset($_POST['submit'])) {
 <h2>Find user by genre</h2>
 
 <form method="post">
-	<label for="Genre">Genre</label>
-	<input type="text" id="Genre" name="Genre">
+	<label for="IdGenre">Genre</label>
+	<input type="text" id="IdGenre" name="IdGenre">
 	<input type="submit" name="submit" value="View Results">
 </form>
 

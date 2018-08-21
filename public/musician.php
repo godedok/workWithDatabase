@@ -68,7 +68,7 @@ class Musician
                         $this->error[] = $key;
                     }
                     break;
-                case "Genre":
+                case "IdGenre":
                     if ($value == "") {
                         $this->genre = null;
                         $this->error[] = $key;
@@ -108,10 +108,18 @@ class Musician
 			"LastName"    => $this->lastName,
 			"Gender"      => $this->gender,
 			"YearOfBirth" => $this->yearOfBirth,
-            "Genre"       => $this->genre,
+            "IdGenre"     => $this->genre,
             "IsInGroup"   => $this->group
 		);
     }
+
+    public function createGenre($genre)
+    {
+        $sql = "INSERT INTO Genre (Name) values ('$genre')";
+        $statement = $this->connect->prepare($sql);
+        $statement->execute();
+    } 
+
     /**
      * Create new record into database
      */
@@ -122,6 +130,7 @@ class Musician
             implode(", ", array_keys($this->arrayKeysValues())),
             ":" . implode(", :", array_keys($this->arrayKeysValues()))
         );
+
         $statement = $this->connect->prepare($sql);
 		$statement->execute($this->arrayKeysValues());
     }

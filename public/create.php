@@ -9,9 +9,10 @@ if (isset($_POST['submit'])) {
 
 	try {
 		$newMusician = new Musician($_POST);
-		$newMusician->createRecord();
+		//$newMusician->createRecord();
+		$newMusician->createGenre($_POST['IdGenre']);
 	} catch(PDOException $error) {
-		
+		echo "Ошибка: " . $error->getMessage();
 	}
 }
 ?>
@@ -35,8 +36,8 @@ if (isset($_POST['submit'])) {
 	<input type="text" name="Gender" id="Gender">
 	<label for="YearOfBirth">YearOfBirth</label>
 	<input type="text" name="YearOfBirth" id="YearOfBirth">
-	<label for="Genre">Genre</label>
-    <input type="text" name="Genre" id="Genre">
+	<label for="IdGenre">Genre</label>
+    <input type="text" name="IdGenre" id="IdGenre">
     <label for="IsInGroup">IsInGroup</label>
 	<input type="text" name="IsInGroup" id="IsInGroup">
 	<input type="submit" name="submit" value="Submit">
