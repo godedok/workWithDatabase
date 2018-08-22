@@ -13,7 +13,7 @@ function createTable($result)
             <th>Last Name</th>
             <th>Gender</th>
             <th>YearOfBirth</th>
-            <th>IdGenre</th>
+            <th>Genre</th>
             <th>IsInGroup</th>
             <th>Edit</th>
             <th>Delete</th>
@@ -27,7 +27,7 @@ function createTable($result)
             <td><?php echo escape($row["LastName"]); ?></td>
             <td><?php echo escape($row["Gender"]); ?></td>
             <td><?php echo escape($row["YearOfBirth"]); ?></td>
-            <td><?php echo escape($row["IdGenre"]); ?></td>
+            <td><?php echo escape($row["Name"]); ?></td>
             <td><?php echo escape($row["IsInGroup"]); ?> </td>
             <td><a href="update-single.php?Id=<?php echo escape($row["Id"]); ?>">Edit</a></td>
             <td><a href="delete.php?Id=<?php echo escape($row["Id"]); ?>">Delete</a></td>
