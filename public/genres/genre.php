@@ -20,13 +20,11 @@ if (isset($_POST['submit'])) {
 ?>
 
 <h2>New genre</h2>
-
 <form method="post">
 	<label for="Name">Genre name</label>
 	<input type="text" name="Name" id="Name">
 	<input type="submit" name="submit" value="Submit">
 </form>
-
 <a href="../index.php">Back to home</a>
 
 <?php require "../templates/footer.php"; ?>

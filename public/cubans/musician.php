@@ -121,7 +121,6 @@ class Musician
             implode(", ", array_keys($this->arrayKeysValues())),
             ":" . implode(", :", array_keys($this->arrayKeysValues()))
         );
-
         $statement = $this->connect->prepare($sql);
 		$statement->execute($this->arrayKeysValues());
     }

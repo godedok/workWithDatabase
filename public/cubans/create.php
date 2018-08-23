@@ -3,7 +3,6 @@
  * We are waiting for data entry and if they are correct
  * we add the entry to the database
  */
-
 require "../../common.php";
 require "musician.php";
 require "../genres/genreClass.php";
@@ -25,7 +24,6 @@ if (isset($_POST['submit'])) {
 ?>
 
 <h2>New musician</h2>
-
 <form method="post">
 	<label for="FirstName">First Name</label>
 	<input type="text" name="FirstName" id="FirstName">
@@ -38,13 +36,12 @@ if (isset($_POST['submit'])) {
     <label for="IsInGroup">IsInGroup</label>
 	<input type="text" name="IsInGroup" id="IsInGroup"><br>
 	<label for="IdGenre">Genre</label>
-	<select name="IdGenre">
-	<option value="0">Select a genre</option>
-	<?php foreach ($genre as $value){ ?>
-    	<option value="<?php echo $value['id']?>"><?php echo $value['Name']?></option>
-    <?php } ?>
-	</select>
-
+	    <select name="IdGenre">
+	        <option value="0">Select a genre</option>
+	        <?php foreach ($genre as $value){ ?>
+    	        <option value="<?php echo $value['id']?>"><?php echo $value['Name']?></option>
+            <?php } ?>
+	    </select>
 	<input type="submit" name="submit" value="Submit">
 </form>
 <br>
