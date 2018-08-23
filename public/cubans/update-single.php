@@ -5,8 +5,8 @@
  */
 
 require "musician.php";
-require "../common.php";
-require "genreClass.php";
+require "../../common.php";
+require "../genres/genreClass.php";
 
 $newMusician = new Musician;
 $newGenre = new Genre;
@@ -27,7 +27,7 @@ if (isset($_GET['Id'])) {
 } 
 ?>
 
-<?php require "templates/header.php"; ?>
+<?php require "../templates/header.php"; ?>
 
 <?php if (isset($_POST['submit']) && !isset($error)) { ?>
 	<blockquote><?php echo escape($_POST['FirstName']); ?> successfully updated.</blockquote>
@@ -65,4 +65,4 @@ if (isset($_GET['Id'])) {
 <br>
 <a href="index.php">Back to home</a>
 
-<?php require "templates/footer.php"; ?>
+<?php require "../templates/footer.php"; ?>

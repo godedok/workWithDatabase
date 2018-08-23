@@ -4,9 +4,9 @@
  * we add the entry to the database
  */
 
-require "../common.php";
+require "../../common.php";
 require "musician.php";
-require "genreClass.php";
+require "../genres/genreClass.php";
 
 $newMusician = new Musician;
 $newGenre = new Genre;
@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<?php require "templates/header.php"; ?>
+<?php require "../templates/header.php"; ?>
 
 <?php if (isset($_POST['submit']) && !isset($error)) { ?>
     <blockquote> <?php echo escape($_POST['FirstName']); ?> successfully added.</blockquote>
@@ -58,4 +58,4 @@ if (isset($_POST['submit'])) {
 <br>
 <a href="index.php">Back to home</a>
 
-<?php require "templates/footer.php"; ?>
+<?php require "../templates/footer.php"; ?>

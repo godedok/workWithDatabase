@@ -29,8 +29,8 @@ function createTable($result)
             <td><?php echo escape($row["YearOfBirth"]); ?></td>
             <td><?php echo escape($row["Name"]); ?></td>
             <td><?php echo escape($row["IsInGroup"]); ?> </td>
-            <td><a href="update-single.php?Id=<?php echo escape($row["Id"]); ?>">Edit</a></td>
-            <td><a href="delete.php?Id=<?php echo escape($row["Id"]); ?>">Delete</a></td>
+            <td><a href="cubans/update-single.php?Id=<?php echo escape($row["Id"]); ?>">Edit</a></td>
+            <td><a href="cubans/delete.php?Id=<?php echo escape($row["Id"]); ?>">Delete</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>

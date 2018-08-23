@@ -4,10 +4,10 @@
  *  and information from the database
  */
 include "templates/header.php";
-require "musician.php";
+require "cubans/musician.php";
 require "../common.php";
 require "table.php";
-require "genreClass.php";
+require "genres/genreClass.php";
 
 $newMusician = new Musician;
 $newGenre = new Genre;
@@ -22,8 +22,8 @@ if (isset($_POST['submit'])) {
 ?>
 
 <ul>
-	<li><a href="create.php"><strong>Create</strong></a> - add a Musician</li>
-	<li><a href="genre.php"><strong>Genre</strong></a> - add a Genre</li>
+	<li><a href="cubans/create.php"><strong>Create</strong></a> - add a Musician</li>
+	<li><a href="genres/genre.php"><strong>Genre</strong></a> - add a Genre</li>
 </ul>
 
 <h2>Find user by genre</h2>
@@ -47,8 +47,8 @@ if (isset($_POST['submit'])) {
         <tr>
             
             <td><?php echo escape($row["Name"]); ?></td>
-			<td><a href="update-genre.php?id=<?php echo escape($row["id"]); ?>">Edit</a></td>
-            <td><a href="delete-genre.php?id=<?php echo escape($row["id"]); ?>">Delete</a></td>
+			<td><a href="genres/update-genre.php?id=<?php echo escape($row["id"]); ?>">Edit</a></td>
+            <td><a href="genres/delete-genre.php?id=<?php echo escape($row["id"]); ?>">Delete</a></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
