@@ -4,21 +4,21 @@
  * if they are correct we add changes to the database 
  */
 
-require "musician.php";
+require "genreClass.php";
 require "../common.php";
 
 if (isset($_POST['submit'])) {
   try {
-    $newMusician = new Musician;
-    $newMusician->updateGenre($_GET['id'], $_POST['Name']);
+    $newGenre = new Genre;
+    $newGenre->updateGenre($_GET['id'], $_POST['Name']);
   } catch(PDOException $error) {
       
   }
 }
   
 if (isset($_GET['id'])) {
-  $newMusician = new Musician;
-  $user = $newMusician->selectGenre($_GET['id']);
+  $newGenre = new Genre;
+  $user = $newGenre->selectGenre($_GET['id']);
 } 
 ?>
 
@@ -27,8 +27,7 @@ if (isset($_GET['id'])) {
 <?php if (isset($_POST['submit']) && !isset($error)) { ?>
 	<blockquote><?php echo escape($_POST['Name']); ?> successfully updated.</blockquote>
 <?php } elseif(isset($error)) { 
-  $newMusician = new Musician($_POST);
-  echo $newMusician->outputError();
+
 } ?>
 
 <h2>Edit a genre</h2>

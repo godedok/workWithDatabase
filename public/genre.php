@@ -5,11 +5,11 @@
  */
 if (isset($_POST['submit'])) {
 	require "../common.php";
-	require "musician.php";
+	require "genreClass.php";
 
 	try {
-		$newMusician = new Musician($_POST);
-		$newMusician->createGenre($_POST['Name']);
+		$newGenre = new Genre;
+		$newGenre->createGenre($_POST['Name']);
 	} catch(PDOException $error) {
 	
 	}

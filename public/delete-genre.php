@@ -5,16 +5,15 @@
 </form>
 
 <?php
-require "musician.php";
+require "genreClass.php";
 /**
  * Take the id and in case of confirmation delete the record
  */
 
 if (isset($_GET["id"]) && isset($_POST["delete"])) {
   try {
-    //$newMusician = new Musician($_GET);
-    $newMusician = new Musician;
-    $newMusician->deleteGenre($_GET["id"]);
+    $newGenre = new Genre;
+    $newGenre->deleteGenre($_GET["id"]);
     $success = "Genre successfully deleted";
     header ('Location: index.php');
   } catch(PDOException $error) {

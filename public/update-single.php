@@ -6,9 +6,11 @@
 
 require "musician.php";
 require "../common.php";
+require "genreClass.php";
 
 $newMusician = new Musician;
-$genre = $newMusician->readGenre();
+$newGenre = new Genre;
+$genre = $newGenre->readGenre();
 
 if (isset($_POST['submit'])) {
   try {
@@ -42,7 +44,7 @@ if (isset($_GET['Id'])) {
         continue;
       } elseif ($key == "IdGenre") {
         $gen = $value;
-        $g = $newMusician->selectGenre($gen);
+        $g = $newGenre->selectGenre($gen);
         continue;
       }?>
       <label for="<?php echo $key; ?>"><?php echo ucfirst($key); ?></label>

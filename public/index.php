@@ -7,10 +7,12 @@ include "templates/header.php";
 require "musician.php";
 require "../common.php";
 require "table.php";
+require "genreClass.php";
 
 $newMusician = new Musician;
+$newGenre = new Genre;
 $result = $newMusician->readTable();
-$resultGenre = $newMusician->readGenre();
+$resultGenre = $newGenre->readGenre();
 
 if (isset($_POST['submit'])) {
 	$newMusician->genre = $_POST['IdGenre'];

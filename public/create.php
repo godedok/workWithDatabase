@@ -6,9 +6,11 @@
 
 require "../common.php";
 require "musician.php";
+require "genreClass.php";
 
 $newMusician = new Musician;
-$genre = $newMusician->readGenre();
+$newGenre = new Genre;
+$genre = $newGenre->readGenre();
 
 if (isset($_POST['submit'])) {
 
