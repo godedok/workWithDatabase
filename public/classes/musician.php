@@ -1,8 +1,9 @@
 <?php
+require_once "connect.php";
 /**
  * Class for working with the database
  */
-class Musician
+class Musician extends Connect
 {
     public $id;
     public $firstName;
@@ -12,19 +13,12 @@ class Musician
     public $genre;
     public $group;
 
-    private $user = "root";
-    private $password = "us19";
-    private $dsn = "mysql:host=localhost;dbname=Musicians";
-    private $options    = array(
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    );
-    private $connect;
-
     public function __construct($POST)
     {
         /**
          * Input validation and adding data to a class object
          */
+        parent::__construct();
         foreach ($POST as $key => $value) {
             switch ($key) {
                 case "Id":
@@ -84,15 +78,6 @@ class Musician
                     }
                     break;
             }
-        }
-        /**
-         * Connect to database
-        */
-        try {
-            $this->connect = new PDO($this->dsn, $this->user, $this->password, $this->options);
-        } 
-        catch (PDOException $e) {
-            echo "Невозможно установить соединение с базой данных: " . $e->getMessage();
         }
     }
     /**

@@ -4,9 +4,9 @@
  * if they are correct we add changes to the database 
  */
 
-require "musician.php";
+require "../classes/musician.php";
 require "../../common.php";
-require "../genres/genreClass.php";
+require "../classes/genreClass.php";
 require "../templates/header.php";
 
 $listMusicians = new Musician;

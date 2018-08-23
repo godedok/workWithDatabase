@@ -8,7 +8,7 @@
 /**
  * Take the id and in case of confirmation delete the record
  */
-require "genreClass.php";
+require "../classes/genreClass.php";
 
 if (isset($_GET["id"]) && isset($_POST["delete"])) {
     try {

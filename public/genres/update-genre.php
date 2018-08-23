@@ -4,7 +4,7 @@
  * if they are correct we add changes to the database 
  */
 
-require "genreClass.php";
+require "../classes/genreClass.php";
 require "../../common.php";
 require "../templates/header.php";
 

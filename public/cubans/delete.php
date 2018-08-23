@@ -8,7 +8,7 @@
 /**
  * Take the id and in case of confirmation delete the record
  */
-require "musician.php";
+require "../classes/musician.php";
 
 if (isset($_GET["Id"]) && isset($_POST["delete"])) {
     try {

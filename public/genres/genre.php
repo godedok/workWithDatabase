@@ -7,13 +7,17 @@ require "../templates/header.php";
 
 if (isset($_POST['submit'])) {
 	require "../../common.php";
-	require "genreClass.php";
+	require "../classes/genreClass.php";
 
 	try {
-		$newGenre = new Genre;
-		$newGenre->createGenre($_POST['Name']); ?>
-		<blockquote> <?php echo escape($_POST['Name']); ?> successfully added.</blockquote>
-	<?php } catch(PDOException $error) {
+		if (!empty($_POST['Name'])) {
+		    $newGenre = new Genre;
+		    $newGenre->createGenre($_POST['Name']); ?>
+		    <blockquote> <?php echo escape($_POST['Name']); ?> successfully added.</blockquote>
+	    <?php } else {
+			echo "Введите новый жанр";
+		}
+	} catch(PDOException $error) {
 		echo "Ошибка: " . $error->getMessage();
 	}
 }

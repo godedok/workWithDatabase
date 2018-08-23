@@ -4,14 +4,14 @@
  *  and information from the database
  */
 include "templates/header.php";
-require "cubans/musician.php";
+require "classes/musician.php";
 require "../common.php";
 require "table.php";
-require "genres/genreClass.php";
+require "classes/genreClass.php";
 
 $listMusicians = new Musician;
-$listGenres = new Genre;
 $resultListMusicians = $listMusicians->readTable();
+$listGenres = new Genre;
 $arrayGenres = $listGenres->readGenre();
 
 if (isset($_POST['submit'])) {

@@ -4,8 +4,8 @@
  * we add the entry to the database
  */
 require "../../common.php";
-require "musician.php";
-require "../genres/genreClass.php";
+require "../classes/musician.php";
+require "../classes/genreClass.php";
 require "../templates/header.php";
 
 $newMusician = new Musician;
