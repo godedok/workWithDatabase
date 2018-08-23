@@ -7,6 +7,7 @@
 require "musician.php";
 require "../../common.php";
 require "../genres/genreClass.php";
+require "../templates/header.php";
 
 $newMusician = new Musician;
 $newGenre = new Genre;
@@ -15,9 +16,10 @@ $genre = $newGenre->readGenre();
 if (isset($_POST['submit'])) {
   try {
     $newMusician = new Musician(array_merge($_GET, $_POST));
-    $newMusician->updateRecord();
-  } catch(PDOException $error) {
-      
+    $newMusician->updateRecord(); ?>
+    <blockquote><?php echo escape($_POST['FirstName']); ?> successfully updated.</blockquote>
+  <?php } catch(PDOException $error) {
+      echo "Ошибка: " . $error->getMessage();
   }
 }
   
@@ -26,15 +28,6 @@ if (isset($_GET['Id'])) {
   $user = $newMusician->selectRecord();
 } 
 ?>
-
-<?php require "../templates/header.php"; ?>
-
-<?php if (isset($_POST['submit']) && !isset($error)) { ?>
-	<blockquote><?php echo escape($_POST['FirstName']); ?> successfully updated.</blockquote>
-<?php } elseif(isset($error)) { 
-  $newMusician = new Musician($_POST);
-  echo $newMusician->outputError();
-} ?>
 
 <h2>Edit a musician</h2>
 
@@ -63,6 +56,6 @@ if (isset($_GET['Id'])) {
 </form>
 
 <br>
-<a href="index.php">Back to home</a>
+<a href="../index.php">Back to home</a>
 
 <?php require "../templates/footer.php"; ?>

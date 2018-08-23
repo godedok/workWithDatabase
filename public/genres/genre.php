@@ -3,26 +3,21 @@
  * We are waiting for data entry and if they are correct
  * we add the entry to the database
  */
+require "../templates/header.php";
+
 if (isset($_POST['submit'])) {
 	require "../../common.php";
 	require "genreClass.php";
 
 	try {
 		$newGenre = new Genre;
-		$newGenre->createGenre($_POST['Name']);
-	} catch(PDOException $error) {
-	
+		$newGenre->createGenre($_POST['Name']); ?>
+		<blockquote> <?php echo escape($_POST['Name']); ?> successfully added.</blockquote>
+	<?php } catch(PDOException $error) {
+		echo "Ошибка: " . $error->getMessage();
 	}
 }
 ?>
-
-<?php require "../templates/header.php"; ?>
-
-<?php if (isset($_POST['submit']) && !isset($error)) { ?>
-    <blockquote> <?php echo escape($_POST['Name']); ?> successfully added.</blockquote>
-<?php } elseif(isset($error)) {
-    echo "Ошибка: " . $error->getMessage();	
-} ?>
 
 <h2>New genre</h2>
 

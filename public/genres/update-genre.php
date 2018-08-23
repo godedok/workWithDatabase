@@ -6,13 +6,15 @@
 
 require "genreClass.php";
 require "../../common.php";
+require "../templates/header.php";
 
 if (isset($_POST['submit'])) {
   try {
     $newGenre = new Genre;
-    $newGenre->updateGenre($_GET['id'], $_POST['Name']);
-  } catch(PDOException $error) {
-      
+    $newGenre->updateGenre($_GET['id'], $_POST['Name']); ?>
+    <blockquote><?php echo escape($_POST['Name']); ?> successfully updated.</blockquote>
+  <?php } catch(PDOException $error) {
+    echo "Ошибка: " . $error->getMessage();
   }
 }
   
@@ -21,14 +23,6 @@ if (isset($_GET['id'])) {
   $user = $newGenre->selectGenre($_GET['id']);
 } 
 ?>
-
-<?php require "../templates/header.php"; ?>
-
-<?php if (isset($_POST['submit']) && !isset($error)) { ?>
-	<blockquote><?php echo escape($_POST['Name']); ?> successfully updated.</blockquote>
-<?php } elseif(isset($error)) { 
-
-} ?>
 
 <h2>Edit a genre</h2>
 

@@ -17,7 +17,7 @@ if (isset($_GET["id"]) && isset($_POST["delete"])) {
     $success = "Genre successfully deleted";
     header ('Location: ../index.php');
   } catch(PDOException $error) {
-
+    echo "Ошибка: " . $error->getMessage();
   }
 } elseif (isset($_POST["cancel"])) {
   header ('Location: ../index.php');

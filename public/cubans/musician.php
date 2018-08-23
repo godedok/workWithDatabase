@@ -11,7 +11,6 @@ class Musician
     public $yearOfBirth;
     public $genre;
     public $group;
-    public $error;
 
     private $user = "root";
     private $password = "us19";
@@ -183,17 +182,5 @@ class Musician
         $statement = $this->connect->prepare($sql);
         $statement->bindValue(':Id', $this->id);
         $statement->execute();
-    }
-    /**
-     * Displays information about the error of the entered data
-     */
-    public function outputError()
-    {
-        $result = "";
-        foreach ($this->error as $value) {
-            $result .= "{$value}, ";
-        }
-        $result = "Input error in " . substr($result, 0, -2) . ".";
-        return $result;
     }
 }

@@ -7,30 +7,22 @@
 require "../../common.php";
 require "musician.php";
 require "../genres/genreClass.php";
+require "../templates/header.php";
 
 $newMusician = new Musician;
 $newGenre = new Genre;
 $genre = $newGenre->readGenre();
 
 if (isset($_POST['submit'])) {
-
-
 	try {
 		$newMusician = new Musician($_POST);
-		$newMusician->createRecord();
-	} catch(PDOException $error) {
+		$newMusician->createRecord(); ?>
+		<blockquote> <?php echo escape($_POST['FirstName']); ?> successfully added.</blockquote>
+	<?php } catch(PDOException $error) {
 		echo "Ошибка: " . $error->getMessage();
 	}
 }
 ?>
-
-<?php require "../templates/header.php"; ?>
-
-<?php if (isset($_POST['submit']) && !isset($error)) { ?>
-    <blockquote> <?php echo escape($_POST['FirstName']); ?> successfully added.</blockquote>
-<?php } elseif(isset($error)) {
-    echo $newMusician->outputError();	
-} ?>
 
 <h2>New musician</h2>
 
@@ -56,6 +48,6 @@ if (isset($_POST['submit'])) {
 	<input type="submit" name="submit" value="Submit">
 </form>
 <br>
-<a href="index.php">Back to home</a>
+<a href="../index.php">Back to home</a>
 
 <?php require "../templates/footer.php"; ?>
