@@ -10,22 +10,22 @@ require "../templates/header.php";
 
 if (isset($_POST['submit'])) {
     try {
-        $newGenre = new Genre;
-        $newGenre->updateGenre($_GET['id'], $_POST['Name']); ?>
+        $listGenres = new Genre;
+        $listGenres->updateGenre($_GET['id'], $_POST['Name']); ?>
         <blockquote><?php echo escape($_POST['Name']); ?> successfully updated.</blockquote>
     <?php } catch(PDOException $error) {
         echo "Ошибка: " . $error->getMessage();
     }
 }
 if (isset($_GET['id'])) {
-    $newGenre = new Genre;
-    $user = $newGenre->selectGenre($_GET['id']);
+    $listGenres = new Genre;
+    $genre = $listGenres->selectGenre($_GET['id']);
 } 
 ?>
 
 <h2>Edit a genre</h2>
 <form method="post">
-    <?php foreach ($user as $key => $value) : 
+    <?php foreach ($genre as $key => $value) :
         if ($key == "id") {
             continue;
         }?>

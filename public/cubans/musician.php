@@ -17,7 +17,7 @@ class Musician
     private $dsn = "mysql:host=localhost;dbname=Musicians";
     private $options    = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-      );
+    );
     private $connect;
 
     public function __construct($POST)
@@ -88,13 +88,11 @@ class Musician
         /**
          * Connect to database
         */
-        if (!isset($this->connect)) {
-            try {
-                $this->connect = new PDO($this->dsn, $this->user, $this->password, $this->options);
-            } 
-            catch (PDOException $e) {
-                echo "Невозможно установить соединение с базой данных: " . $e->getMessage();
-            }
+        try {
+            $this->connect = new PDO($this->dsn, $this->user, $this->password, $this->options);
+        } 
+        catch (PDOException $e) {
+            echo "Невозможно установить соединение с базой данных: " . $e->getMessage();
         }
     }
     /**

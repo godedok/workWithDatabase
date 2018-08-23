@@ -9,8 +9,8 @@ require "../genres/genreClass.php";
 require "../templates/header.php";
 
 $newMusician = new Musician;
-$newGenre = new Genre;
-$genre = $newGenre->readGenre();
+$listGenres = new Genre;
+$arrayGenres = $listGenres->readGenre();
 
 if (isset($_POST['submit'])) {
 	try {
@@ -37,9 +37,9 @@ if (isset($_POST['submit'])) {
 	<input type="text" name="IsInGroup" id="IsInGroup"><br>
 	<label for="IdGenre">Genre</label>
 	    <select name="IdGenre">
-	        <option value="0">Select a genre</option>
-	        <?php foreach ($genre as $value){ ?>
-    	        <option value="<?php echo $value['id']?>"><?php echo $value['Name']?></option>
+	        <option value="">Select a genre</option>
+	        <?php foreach ($arrayGenres as $genre){ ?>
+    	        <option value="<?php echo $genre['id']?>"><?php echo $genre['Name']?></option>
             <?php } ?>
 	    </select>
 	<input type="submit" name="submit" value="Submit">

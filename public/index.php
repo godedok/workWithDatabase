@@ -9,14 +9,14 @@ require "../common.php";
 require "table.php";
 require "genres/genreClass.php";
 
-$newMusician = new Musician;
-$newGenre = new Genre;
-$result = $newMusician->readTable();
-$resultGenre = $newGenre->readGenre();
+$listMusicians = new Musician;
+$listGenres = new Genre;
+$resultListMusicians = $listMusicians->readTable();
+$arrayGenres = $listGenres->readGenre();
 
 if (isset($_POST['submit'])) {
-	$newMusician->genre = $_POST['IdGenre'];
-	$result = $newMusician->findRecord();
+	$listMusicians->genre = $_POST['IdGenre'];
+	$resultListMusicians = $listMusicians->findRecord();
 }
 ?>
 
@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
             <th>Genre Name</th>
 		</tr>
 	</thead>
-	<?php foreach ($resultGenre as $row) : ?>
+	<?php foreach ($arrayGenres as $row) : ?>
         <tr>
             <td><?php echo escape($row["Name"]); ?></td>
 			<td><a href="genres/update-genre.php?id=<?php echo escape($row["id"]); ?>">Edit</a></td>
@@ -50,5 +50,5 @@ if (isset($_POST['submit'])) {
 </table>
 
 <h2>List of musicians</h2>
-<?php createTable($result); ?>
+<?php createTable($resultListMusicians); ?>
 <?php include "templates/footer.php"; ?>

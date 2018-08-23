@@ -9,34 +9,33 @@ require "../../common.php";
 require "../genres/genreClass.php";
 require "../templates/header.php";
 
-$newMusician = new Musician;
-$newGenre = new Genre;
-$genre = $newGenre->readGenre();
+$listMusicians = new Musician;
+$listGenres = new Genre;
+$arrayGenres = $listGenres->readGenre();
 
 if (isset($_POST['submit'])) {
     try {
-        $newMusician = new Musician(array_merge($_GET, $_POST));
-        $newMusician->updateRecord(); ?>
+        $listMusicians = new Musician(array_merge($_GET, $_POST));
+        $listMusicians->updateRecord(); ?>
         <blockquote><?php echo escape($_POST['FirstName']); ?> successfully updated.</blockquote>
     <?php } catch(PDOException $error) {
         echo "Ошибка: " . $error->getMessage();
     }
 }
-  
 if (isset($_GET['Id'])) {
-    $newMusician = new Musician($_GET);
-    $user = $newMusician->selectRecord();
+    $listMusicians = new Musician($_GET);
+    $musician = $listMusicians->selectRecord();
 } 
 ?>
 
 <h2>Edit a musician</h2>
 <form method="post">
-    <?php foreach ($user as $key => $value) : 
+    <?php foreach ($musician as $key => $value) : 
         if ($key == "Id") {
             continue;
         } elseif ($key == "IdGenre") {
-            $gen = $value;
-            $g = $newGenre->selectGenre($gen);
+            $idGenre = $value;
+            $inputGenre = $listGenres->selectGenre($idGenre);
             continue;
         } ?>
         <label for="<?php echo $key; ?>"><?php echo ucfirst($key); ?></label>
@@ -45,9 +44,9 @@ if (isset($_GET['Id'])) {
 <br>
     <label for="IdGenre">Genre</label>
         <select name="IdGenre">
-            <option value="<?php echo $gen; ?>" ><?php echo $g["Name"]; ?></option>
-            <?php foreach ($genre as $value){ ?>
-                <option value="<?php echo $value['id']?>"><?php echo $value['Name']?></option>
+            <option value="<?php echo $idGenre; ?>" ><?php echo $inputGenre["Name"]; ?></option>
+            <?php foreach ($arrayGenres as $genre){ ?>
+                <option value="<?php echo $genre['id']?>"><?php echo $genre['Name']?></option>
             <?php } ?>
         </select>
     <input type="submit" name="submit" value="Submit">

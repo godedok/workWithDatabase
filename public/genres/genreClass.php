@@ -7,7 +7,7 @@ class Genre
     private $dsn = "mysql:host=localhost;dbname=Musicians";
     private $options    = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-      );
+    );
     private $connect;
     
     public function __construct()
@@ -15,13 +15,11 @@ class Genre
         /**
          * Connect to database
         */
-        if (!isset($this->connect)) {
-            try {
-                $this->connect = new PDO($this->dsn, $this->user, $this->password, $this->options);
-            } 
-            catch (PDOException $e) {
-                echo "Невозможно установить соединение с базой данных: " . $e->getMessage();
-            }
+        try {
+            $this->connect = new PDO($this->dsn, $this->user, $this->password, $this->options);
+        } 
+        catch (PDOException $e) {
+            echo "Невозможно установить соединение с базой данных: " . $e->getMessage();
         }
     }
     /**
@@ -29,8 +27,9 @@ class Genre
      */
     public function createGenre($genre)
     {
-        $sql = "INSERT INTO Genre (Name) values ('$genre')";
+        $sql = "INSERT INTO Genre (Name) values (:Name)";
         $statement = $this->connect->prepare($sql);
+        $statement->bindValue(':Name', $genre);
         $statement->execute();
     }
     /**
@@ -38,8 +37,10 @@ class Genre
      */
     public function updateGenre($id, $genre)
     {
-        $sql = "UPDATE Genre SET Name = '$genre' WHERE id = $id";
+        $sql = "UPDATE Genre SET Name = :Name WHERE id = :id";
         $statement = $this->connect->prepare($sql);
+        $statement->bindValue(':Name', $genre);
+        $statement->bindValue(':id', $id);
         $statement->execute();
     }
     /**
@@ -57,14 +58,16 @@ class Genre
      */
     public function deleteGenre($id)
     {
-        $sql = "DELETE FROM Genre WHERE id = $id";
+        $sql = "DELETE FROM Genre WHERE id = :id";
         $statement = $this->connect->prepare($sql);
+        $statement->bindValue(':id', $id);
         $statement->execute();
     }
     public function selectGenre($id)
     {
-        $sql = "SELECT * FROM Genre WHERE id = $id";
+        $sql = "SELECT * FROM Genre WHERE id = :id";
         $statement = $this->connect->prepare($sql);
+        $statement->bindValue(':id', $id);
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
